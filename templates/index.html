@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Orders</title>
+</head>
+<style>
+    body {
+    background-color: #1f1f1f;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 30px;
+}
+
+strong {
+    color: #ffcc00;
+}
+
+input[type="text"] {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #555555;
+    padding: 5px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+a {
+    color: #ffcc00;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ff9900;
+}
+</style>
+<body>
+    <h2>Create New Order</h2>
+    <form action="/" method="POST">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="description">Description:</label><br>
+        <input type="text" id="description" name="description"><br>
+        <label for="status">Status:</label><br>
+        <input type="text" id="status" name="status" value="active"><br>
+        <button type="submit">Create Order</button>
+    </form>
+
+    <h1>All Orders</h1>
+    <ul>
+        {% for order in orders %}
+        <li>
+            <strong>Name:</strong> {{ order.name }}<br>
+            <strong>Description:</strong> {{ order.description }}<br>
+            <strong>Status:</strong> {{ order.status }}<br>
+            <form action="/update_order/{{ order.id }}" method="POST">
+                <label for="new_status">New Status:</label>
+                <input type="text" id="new_status" name="new_status" value="{{ order.status }}">
+                <button type="submit">Update Status</button>
+            </form>
+            <form action="/delete_order/{{ order.id }}" method="POST">
+                <button type="submit">Delete Order</button>
+            </form>
+        </li>
+        <br>
+        {% endfor %}    
+    </ul>
+
+    <form action="/delete_all_orders" method="POST">
+        <button type="submit">Delete All Orders</button>
+    </form>
+    <a href="/active_orders">Active Orders</a> <!-- Ссылка на страницу с активными заказами -->
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles2.css">
+    <title>Active Orders</title>
+</head>
+<style>
+    body {
+    background-color: #1f1f1f;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+h1 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 30px;
+}
+
+strong {
+    color: #ffcc00;
+}
+
+</style>
+<body>
+    <h1>Active Orders</h1>
+    <ul>
+        {% for order in active_orders %}
+            <li>
+                <strong>Name:</strong> {{ order.name }}<br>
+                <strong>Description:</strong> {{ order.description }}<br>
+                <strong>Status:</strong> {{ order.status }}<br>
+            </li>
+            <br>
+        {% endfor %}
+    </ul>
+</body>
+</html>
